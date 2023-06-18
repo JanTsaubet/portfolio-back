@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/JanTsaubet/portfolio-back/issues"
   },
-  "homepage": "https://github.com/JanTsaubet/portfolio-back#readme"
+  "homepage": "https://github.com/JanTsaubet/portfolio-back#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
 }
