@@ -20,6 +20,8 @@ The following endpoints are available:
 - `PUT /projects/:id`: Update an existing project
 - `DELETE /projects/:id`: Delete a project
 
+The following endpoints are in development:
+
 - **Skills**
 - `GET /skills`: Get all skills
 - `GET /skills/:id`: Get a specific skill by ID
