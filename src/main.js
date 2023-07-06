@@ -1,4 +1,7 @@
 const express = require("express");
+const config = require("dotenv");
+config();
+console.log(process.env);
 const app = express();
 
 // import router from projects.js

@@ -1,4 +1,7 @@
+const repository = require('../repositories/projects_repository.js');
+
 // emul_database
+
 let projects = [
   {
     name: "Ecommerce prodcut page",
@@ -20,11 +23,13 @@ let projects = [
   },
 ];
 
-function getProjects(req, res) {
+
+async function getProjects(req, res) {
     const query = req.query;
+    const dbProjects = await repository.all();
     // send all if no query
     if (!query.search) {
-      res.send(projects);
+      res.send(dbProjects);
       return;
     }
     // get query
