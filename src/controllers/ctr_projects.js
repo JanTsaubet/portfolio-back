@@ -78,9 +78,11 @@ function deleteProject(req, res) {
   res.send("Deleted");
 }
 
-function getProjectById(req, res) {
+async function getProjectById(req, res) {
   const id = req.params.id;
-  const project = projects.find((p) => p.id == id);
+  // const project = projects.find((p) => p.id == id);
+  const project = await repository.one(id);
+
   if (!project) {
     res.status(404);
     res.send("Not Found");
