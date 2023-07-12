@@ -43,39 +43,54 @@ async function getProjects(req, res) {
     res.send(result);
 }
 
-function insertProject(req, res) {
+async function insertProject(req, res) {
   const _newProject = req.body;
   _newProject.id = projects[projects.length - 1].id + 1;
-  projects.push(_newProject);
-  res.sendStatus(200);
+  // projects.push(_newProject);
+  const result = await repository.create(_newProject);
+  if (result.acknowledged) res.status(201).send("Project created successfully");
+  else res.status(500).send("Project not created");
+
 }
 
-function updateProject(req, res) {
+async function updateProject(req, res) {
   const id = req.params.id;
-  const project = projects.find((p) => p.id == id);
-  if (!project) {
-    res.status(404);
-    res.send("Not Found");
-    return;
-  }
-
   const body = req.body;
-  project.name = body.name ? body.name : project.name;
-  project.img = body.img ? body.img : project.img;
 
-  res.send("Done");
+  const result = await repository.update(id,body);
+
+  if (result.acknowledged) res.status(202).send("Project updated successfully");
+  else res.status(500).send("Project not updated");
+
+  // const project = projects.find((p) => p.id == id);
+  // if (!project) {
+  //   res.status(404);
+  //   res.send("Not Found");
+  //   return;
+  // }
+
+  // project.name = body.name ? body.name : project.name;
+  // project.img = body.img ? body.img : project.img;
+
+  // res.send("Done");
 }
 
-function deleteProject(req, res) {
+async function deleteProject(req, res) {
   const id = req.params.id;
-  const index = projects.findIndex((p) => p.id == id);
-  if (index == -1) {
-    res.status(404);
-    res.send("Not Found");
-    return;
-  }
-  projects.splice(index, 1);
-  res.send("Deleted");
+
+  const result = await repository.delete(id);
+
+  if (result.acknowledged) res.status(202).send("Project deleted successfully");
+  else res.status(500).send("Project not deleted");
+
+  // const index = projects.findIndex((p) => p.id == id);
+  // if (index == -1) {
+  //   res.status(404);
+  //   res.send("Not Found");
+  //   return;
+  // }
+  // projects.splice(index, 1);
+  // res.send("Deleted");
 }
 
 async function getProjectById(req, res) {

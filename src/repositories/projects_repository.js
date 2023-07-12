@@ -36,4 +36,14 @@ async function create(project) {
   return await collection.create(project);
 }
 
-module.exports = { all, one, create };
+async function update(_id, _data) {
+  const collection = await getCollection("projects");
+  return await collection.updateOne({_id: new ObjectId(_id)}, {$set: _data});
+}
+
+async function remove(_id) {
+  const collection = await getCollection("projects");
+  return await collection.deleteOne({_id: new ObjectId(_id)});
+}
+
+module.exports = { all, one, create, update, remove};
