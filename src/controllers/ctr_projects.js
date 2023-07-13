@@ -106,10 +106,4 @@ async function getProjectById(req, res) {
   res.send(project);
 }
 
-module.exports = {
-  getProjects: getProjects,
-  insertProject: insertProject,
-  updateProject: updateProject,
-  deleteProject: deleteProject,
-  getProjectById: getProjectById,
-};
+module.exports = { getProjects, insertProject, updateProject, deleteProject, getProjectById };
