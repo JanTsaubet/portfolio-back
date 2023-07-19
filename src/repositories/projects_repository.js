@@ -1,4 +1,5 @@
 const { MongoClient, ObjectId } = require("mongodb");
+
 const mongodbUrl = process.env.MONGODB_URL;
 
 async function getDatabase() {
@@ -22,7 +23,7 @@ async function all() {
   return result.toArray();
 }
 
-async function one (_id){
+async function one(_id){
   const collection = await getCollection("projects");
   const result = await collection.findOne({_id: new ObjectId(_id)});
 
@@ -33,7 +34,7 @@ async function create(project) {
   const db = await getDatabase();
   const collection = db.collection("projects");
 
-  return await collection.create(project);
+  return await collection.insertOne(project);
 }
 
 async function update(_id, _data) {
